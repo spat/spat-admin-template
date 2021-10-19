@@ -1,0 +1,33 @@
+page-index
+  div(ref='admin', data-is='admin-page')
+
+  style(type='less').
+    :scope {
+      display: block;
+    }
+
+  script.
+    this.preload = ({req, res}) => {
+      if (!spat.isBrowser) return ;
+
+      //- // 未ログインの場合
+      //- if (!app.utils.auth.isSignIn()) {
+      //-   res.redirect(301, '/login');
+      //-   return;
+      //- }
+      
+      //- //- TODO: topページどうするか固まり次第対応する、開発用に暫定的に/recordにリダイレクトさせる
+      //- if (req.url === '/') {
+      //-   res.redirect(301, '/record');
+      //-   return;
+      //- }
+    };
+
+    this.on('show', ({req, res}) => {
+      // 再ロードしないよう対応
+      if (this.collection && req.isBack) return ;
+
+      this.refs.admin.setup({
+        path: req.Url.pathname,
+      });
+    });

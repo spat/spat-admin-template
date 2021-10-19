@@ -1,0 +1,41 @@
+{
+  "name": "spat-template",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "setup": "yarn",
+    "clean": "spat clean; rm -rf node_modules yarn.lock",
+    "build": "spat build",
+    "start": "spat start",
+    "dev": "spat dev",
+    "deploy": "npm run build; gcloud app deploy --project $npm_package_config_gae_stg gae_stg.yaml --version stg -q",
+    "browse": "gcloud app browse --project $npm_package_config_gae_stg --service default",
+    "dev:prod": "NODE_ENV=production spat dev",
+    "deploy:prod": "npm run build:prod; gcloud app deploy --project $npm_package_config_gae_prod gae_prod.yaml --version prod -q",
+    "icon": "fontcustom compile ./static/images/icons --font_name icons --output static/icons/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "config": {
+    "gae": {
+      "stg": "hoge",
+      "prod": "hoge"
+    }
+  },
+  "author": "",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "basic-auth": "^2.0.1",
+    "dayjs": "^1.10.4",
+    "firebase": "^8.2.1",
+    "jquery": "^3.5.0",
+    "meltline": "0.1.13",
+    "parcel-plugin-riot-pug": "git://github.com/phi-jp/parcel-plugin-riot-pug.git#037609bc2fbb17ec3c6097f879c6d29fd5e1c256",
+    "spat": "git://github.com/spat/spat.git#bcf5d21100df8ee1e7a06d182e875b77c70fc00b",
+    "spat-admin": "git://github.com/spat/spat-admin.git#9ae53a2bb95eb7b2cb5a5311289a4b9e77c55c50"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0"
+  }
+}

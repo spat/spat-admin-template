@@ -1,0 +1,26 @@
+page-error
+  div.s-full.f.fh
+    div.text-center
+      h2.fs128.mb16 {statusCode}
+      p.fs24.mb32 {errorMassage}
+
+      a.text-link.rounded-full(href='/') to TOP
+
+  style(type='less').
+    :scope {
+      display: block;
+    }
+
+  script.
+    this.preload = ({req, res}) => {
+      return {
+        statusCode: res.statusCode,
+        errorMassage: res.error ? res.error.message : 'Error',
+      };
+    };
+
+    this.head = () => {
+      return {
+        title: 'Hello, spat!',
+      };
+    };
